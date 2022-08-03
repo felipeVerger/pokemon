@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { RegisterContext } from "../../context/ContextoFormulario";
 
 const Input = ({ name, label, type = "text" }) => {
   // Aqui deberíamos acceder al estado global para poder obtener los datos
   // del formulario y una manera de actualizar los mismos.
+  const {clientInfo, setClientInfo} = useContext(RegisterContext);
 
   // También, utilizaremos un estado local para manejar el estado del input.
+  const [currentValue, setCurrentValue] = useState({
+    nombre: '',
+    apellido: '',
+    email: '',
+    nombrePokemon: '',
+  });
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     // Aquí deberíamos actualizar el estado local del input.
+    setCurrentValue((prev) => ({...prev, [name]: e.target.value}));
+    console.log(currentValue);
   };
 
   const onBlur = (e) => {
@@ -24,9 +34,9 @@ const Input = ({ name, label, type = "text" }) => {
       <label htmlFor={name}>{label}</label>
       <input
         type={type}
-        value={"Siempre tengo el mismo valor XD"}
+        // value={currentValue}
         id={name}
-        onChange={onChange}
+        onChange={handleChange}
         onBlur={onBlur}
       />
     </div>
