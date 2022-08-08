@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home/Home";
+import Home from "./pages/Home/Home";
 import Formulario from "./components/Formulario/Formulario";
 import "./App.css";
 import ContextFormProvider from "./context/ContextoFormulario";

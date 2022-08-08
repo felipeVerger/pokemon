@@ -1,15 +1,23 @@
-// Aqui debemos crear nuestro contexto y nuestro provider.
-import React, { createContext, useState } from 'react'
+import React, { createContext, useReducer } from 'react'
+import { initialState, reducer } from '../reducer/reducer';
 
-export const RegisterContext = createContext();
+/**
+ * Creamos el contexto para guardar los datos del formulario en un estado global.
+ * Luego creamos un provider para encapsular los componentes que utilizaran este estado global y sus funciones.
+ */
+export const FormContext = createContext();
 
 const ContextFormProvider = ({ children }) => {
-  const [clientInfo, setClientInfo] = useState();
+
+  /**
+   * El useReducer es el que contiene el estado global y las funciones para modificarlo
+   */
+  const  [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <RegisterContext.Provider value={{clientInfo, setClientInfo}}>
+    <FormContext.Provider value={{state, dispatch}}>
         { children }
-    </RegisterContext.Provider>
+    </FormContext.Provider>
   )
 }
 
